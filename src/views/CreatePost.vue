@@ -58,11 +58,11 @@ export default defineComponent({
         const { columnId } = store.state.user
         if (columnId) {
           const newPost: PostProps = {
-            id: new Date().getTime(),
+            _id: new Date().toLocaleString(),
             title: titleVal.value,
             content: contentVal.value,
-            columnId,
-            createdAt: new Date().toLocaleString()
+            createdAt: new Date().toLocaleString(),
+            column: new Date().toLocaleString()
           }
           store.commit('createPost', newPost)
           router.push({ name: 'column', params: { id: columnId } })
