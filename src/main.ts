@@ -7,9 +7,6 @@ import App from './App.vue'
 axios.defaults.baseURL = 'https://apis.imooc.com/api'
 axios.interceptors.request.use(config => {
   config.params = { ...config.params, icode: '55A762704CEDEC3C' }
-  if (config.method === 'post') {
-    config.data = { ...config.data, icode: '55A762704CEDEC3C' }
-  }
   if (config.data instanceof FormData) {
     config.data.append('icode', '55A762704CEDEC3C')
   } else {

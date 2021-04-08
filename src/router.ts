@@ -4,6 +4,7 @@ import Login from './views/Login.vue'
 import Signup from './views/Signup.vue'
 import ColumnDetail from './views/ColumnDetail.vue'
 import CreatePost from './views/CreatePost.vue'
+import Uploader from './components/Uploader.vue'
 import store from './store'
 
 const routerHistory = createWebHistory()
@@ -36,6 +37,12 @@ const router = createRouter({
       path: '/create',
       name: 'create',
       component: CreatePost,
+      meta: { requiredlogin: true }
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: Uploader,
       meta: { requiredlogin: true }
     }
   ]
