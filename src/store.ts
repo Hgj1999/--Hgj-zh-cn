@@ -80,6 +80,9 @@ const store = createStore<GlobalDataProps>({
     fetchPost (state, rawData) {
       state.posts = [rawData.data]
     },
+    deletePost (state, { data }) {
+      state.posts = state.posts.filter(post => post._id !== data._id)
+    },
     updatePost (state, { data }) {
       state.posts = state.posts.map(post => {
         if (post._id === data._id) {
@@ -106,6 +109,7 @@ const store = createStore<GlobalDataProps>({
     },
     logout (state) {
       state.token = ''
+      state.user = { isLogin: false }
       localStorage.removeItem('token')
       delete axios.defaults.headers.common.Authorization
     }
@@ -137,6 +141,9 @@ const store = createStore<GlobalDataProps>({
     },
     createPost ({ commit }, payload) {
       return asyncAndCommit('/posts', 'createPost', commit, { method: 'post', data: payload })
+    },
+    deletePost ({ commit }, id) {
+      return asyncAndCommit(`/posts/${id}`, 'deletePost', commit, { method: 'delete' })
     },
     loginAndFetch ({ dispatch }, loginData) {
       return dispatch('login', loginData).then(() => {
