@@ -10,9 +10,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { defineComponent, ref, watch, onUnmounted } from 'vue'
 import useClickOutside from '../hooks/useClickOutside'
-
+import mitt from 'mitt'
+export const emitter = mitt()
 export default defineComponent({
   name: 'Dropdown',
   props: {
@@ -21,12 +22,23 @@ export default defineComponent({
       required: true
     }
   },
-  setup () {
+  emits: ['item-clicked'],
+  setup (props, context) {
     const isOpen = ref(false)
     const dropdownRef = ref<null | HTMLElement>(null)
     const toggleOpen = () => {
       isOpen.value = !isOpen.value
     }
+    const dropDownItemClicked = (e: any) => {
+      if (e.props.closeAfterClick) {
+        isOpen.value = false
+      }
+      context.emit('item-clicked', e)
+    }
+    emitter.on('dropdown-item-clicked', dropDownItemClicked)
+    onUnmounted(() => {
+      emitter.off('dropdown-item-clicked', dropDownItemClicked)
+    })
     const isClickOutside = useClickOutside(dropdownRef)
     watch(isClickOutside, () => {
       if (isOpen.value && isClickOutside.value) {

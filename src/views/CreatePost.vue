@@ -12,6 +12,7 @@
     <template #loading>
       <div class="d-flex">
         <div class="spinner-border text-secondary" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
         <h2>正在上传</h2>
       </div>
@@ -61,7 +62,7 @@ import { beforeUploadCheck } from '../helper'
 import createMessage from '../components/createMessage'
 
 export default defineComponent({
-  name: 'Login',
+  name: 'CreatePost',
   components: {
     ValidateInput,
     ValidateForm,
