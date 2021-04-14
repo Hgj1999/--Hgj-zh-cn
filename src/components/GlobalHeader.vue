@@ -10,7 +10,7 @@
         <dropdown :title="`你好 ${user.nickName}`">
           <dropdown-item closeAfterClick><router-link to="/create" class="dropdown-item">新建文章</router-link></dropdown-item>
           <dropdown-item closeAfterClick><router-link :to="`/column/${user.column}`" class="dropdown-item">我的专栏</router-link></dropdown-item>
-          <dropdown-item closeAfterClick><a href="#" class="dropdown-item">编辑资料</a></dropdown-item>
+          <dropdown-item closeAfterClick disabled><a href="#" class="dropdown-item">编辑资料</a></dropdown-item>
           <dropdown-item closeAfterClick><a href="#" class="dropdown-item" @click="handleLogout">退出登陆</a></dropdown-item>
         </dropdown>
       </li>
@@ -40,7 +40,7 @@ export default defineComponent({
   setup () {
     const router = useRouter()
     const handleLogout = () => {
-      store.dispatch('logout')
+      store.commit('logout')
       createMessage('退出登录成功，2秒后跳转到首页', 'success', 200)
       setTimeout(() => {
         router.push('/')

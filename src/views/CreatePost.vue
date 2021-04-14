@@ -18,8 +18,10 @@
       </div>
     </template>
     <template #uploaded="dataProps">
-      <img :src="dataProps.uploadedData.data.url" alt="">
-      <h3>点击重新上传</h3>
+      <div class="uploaded-area">
+        <img :src="dataProps.uploadedData.data.url" alt="">
+        <h3>点击重新上传</h3>
+      </div>
     </template>
     </uploader>
     <!-- <input type="file" name="file" @change.prevent="handleFileChange"/> -->
@@ -156,10 +158,25 @@ export default defineComponent({
 .create-post-page .file-upload-container {
   height: 200px;
   cursor: pointer;
+  overflow: hidden;
 }
 .create-post-page .file-upload-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.uploaded-area {
+  position: relative;
+}
+.uploaded-area:hover h3 {
+  display: block;
+}
+.uploaded-area h3 {
+  display: none;
+  position: absolute;
+  color: #999;
+  text-align: center;
+  width: 100%;
+  top: 50%;
 }
 </style>
