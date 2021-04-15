@@ -14,7 +14,7 @@
     <h4 class="font-weight-bold text-center">发现精彩</h4>
     <column-list :list="list"></column-list>
     <button
-      class="btn btn-outline-primary mt-2 mb-5 d-grid gap-2 col-6 mx-auto"
+      class="btn btn-outline-primary mt-2 mb-5 d-grid gap-2 col-2 mx-auto"
       @click="loadMorePage" v-if="!isLastPage"
     >加载更多
     </button>
